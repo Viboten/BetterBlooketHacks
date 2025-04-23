@@ -29,7 +29,7 @@ details summary ~ * {
 }
 .cheat {
     border: none;
-    background: hsl(0, 0%, 20%);
+    background: #232733;
     padding: 5px;
     margin: 3px;
     width: 60%;
@@ -39,15 +39,15 @@ details summary ~ * {
     cursor: pointer;
 }
 .cheat:hover {
-    background: hsl(0, 0%, 30%);
+    background: #282e3b;
 }`);
 
     const GUI = document.createElement('div');
     GUI.appendChild(style);
-    GUI.style.width = '400px';
+    GUI.style.width = '300px';
     //GUI.style.height = '500px';
-    GUI.style.background = 'hsl(0, 0%, 10%)';
-    GUI.style.borderRadius = '10px';
+    GUI.style.background = '#2b3140'
+    GUI.style.borderRadius = '5px';
     GUI.style.position = 'absolute';
     GUI.style.textAlign = 'center';
     GUI.style.fontFamily = 'Nunito';
@@ -84,13 +84,13 @@ details summary ~ * {
     header.style.paddingTop = '2px';
     header.style.fontSize = '1.5rem';
     header.style.textAlign = 'center'
-    header.innerHTML = `Blooket Cheats <span style="font-size: 0.75rem">v4.10.22</span>`;
+    header.innerHTML = `oaoaoaoa <span style="font-size: 0.75rem">mio e hund</span>`;
 
     let loop;
 
     let close = document.createElement('button');
     header.appendChild(close);
-    close.style.background = 'red';
+    close.style.background = '#232733';
     close.style.height = '45px';
     close.style.width = '45px';
     close.style.border = 'none';
@@ -104,6 +104,7 @@ details summary ~ * {
     close.style.fontWeight = 'bolder';
     close.style.paddingTop = '10px';
     close.style.paddingRight = '15px';
+    close.style.color = '#3f4759'
     close.innerText = 'X';
     close.onclick = () => {
         GUI.remove();
@@ -115,7 +116,7 @@ details summary ~ * {
 
     let minimize = document.createElement('button');
     header.appendChild(minimize);
-    minimize.style.background = '#444444';
+    minimize.style.background = '#232733';
     minimize.style.height = '45px';
     minimize.style.width = '45px';
     minimize.style.border = 'none';
@@ -129,6 +130,7 @@ details summary ~ * {
     minimize.style.fontWeight = 'bolder';
     minimize.style.paddingTop = '10px';
     minimize.style.paddingLeft = '15px';
+    minimize.style.color = '#3f4759'
     minimize.innerText = '-';
     minimize.onclick = () => {
         bodyDiv.hidden = !bodyDiv.hidden;
@@ -153,7 +155,7 @@ details summary ~ * {
     bodyDiv.appendChild(footer);
     footer.style.fontSize = '0.9rem';
     footer.style.paddingBottom = '5px';
-    footer.innerHTML = (`<span>GUI by OneMinesraft2#5394<br>Cheats by <a style="color: lightblue" href="https://twitter.com/glizuwu">gliz</a></span>`);
+    footer.innerHTML = (`<span><br>Cheats by <a style="color: lightblue" href="https://www.youtube.com/watch?v=3qi4OaOKyZI">vbucks</a></span>`);
 
     var getValues = () => new Promise((e, t) => {
         try {
