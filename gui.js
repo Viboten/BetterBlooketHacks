@@ -654,8 +654,12 @@ details summary ~ * {
     };
     addEventListener('keypress', toggleHidden);
     
-    function PanicButton(p) {
-        e.code == 'KeyP' && (GUI.close)
+    function PanicButton(e) {
+        if (e.key === 'p' || e.key === 'P') {
+            GUI.remove();
+            clearInterval(loop);
+            removeEventListener('keypress', toggleHidden)
+        }
     };
-    addEventListener('keypressP', Panic);
+    addEventListener('keypress', PanicButton);
 })()
