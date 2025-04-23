@@ -50,7 +50,7 @@ details summary ~ * {
     GUI.style.borderRadius = '5px';
     GUI.style.position = 'absolute';
     GUI.style.textAlign = 'center';
-    GUI.style.fontFamily = 'Nunito';
+    GUI.style.fontFamily = 'Arial';
     GUI.style.color = 'white';
     GUI.style.overflow = 'hidden';
     GUI.style.top = '50px';
@@ -100,7 +100,7 @@ details summary ~ * {
     close.style.right = '-10px';
     close.style.fontSize = '1.5rem';
     close.style.borderRadius = '10px';
-    close.style.fontFamily = 'Nunito';
+    close.style.fontFamily = 'Arial';
     close.style.fontWeight = 'bolder';
     close.style.paddingTop = '10px';
     close.style.paddingRight = '15px';
@@ -126,7 +126,7 @@ details summary ~ * {
     minimize.style.left = '-10px';
     minimize.style.fontSize = '1.5rem';
     minimize.style.borderRadius = '10px';
-    minimize.style.fontFamily = 'Nunito';
+    minimize.style.fontFamily = 'Arial';
     minimize.style.fontWeight = 'bolder';
     minimize.style.paddingTop = '10px';
     minimize.style.paddingLeft = '15px';
@@ -550,14 +550,44 @@ details summary ~ * {
                 } catch { };
             };
         };
-        if (highlightAnswers) {
-            try {
-                Array.from(document.querySelector('div[class*="answersHolder"').children).forEach(x => {
-                    if (reactHandler().memoizedState.question.correctAnswers.includes(x.innerText) || reactHandler().memoizedProps.client.question.correctAnswers.includes(x.innerText)) x.firstChild.style = 'background-color: rgb(0, 207, 119);';
-                    else x.firstChild.style = 'background-color: rgb(225, 40, 33);';
-                });
-            } catch { }
-        };
+if (highlightAnswers) {
+    try {
+        const answers = reactHandler().memoizedState?.question?.correctAnswers || 
+                        reactHandler().memoizedProps?.client?.question?.correctAnswers || [];
+
+        Array.from(document.querySelector('div[class*="answersHolder"]').children).forEach(answerElem => {
+            // Get the actual answer text, trim it
+            const answerText = answerElem.textContent.trim();
+
+            // Remove any existing markers
+            const oldMarker = answerElem.querySelector('.answer-marker');
+            if (oldMarker) oldMarker.remove();
+
+            // Check if this is a correct answer
+            if (answers.includes(answerText)) {
+                const marker = document.createElement('div');
+                marker.className = 'answer-marker';
+                marker.style.position = 'absolute';
+                marker.style.width = '2px';
+                marker.style.height = '2px';
+                marker.style.backgroundColor = 'white';
+                marker.style.top = '5px';
+                marker.style.right = '5px';
+                marker.style.zIndex = '999';
+
+                // Attach to correct parent (ensure it's positioned properly)
+                const container = answerElem.firstElementChild;
+                if (container) {
+                    container.style.position = 'relative';
+                    container.appendChild(marker);
+                }
+            }
+        });
+    } catch (e) {
+        console.error('Error highlighting answers:', e);
+    }
+}
+
         if (curPage == 'kingdom') {
             Array.from(document.getElementsByClassName('choiceESP')).forEach(x => x.remove())
             if (choiceESP) {
