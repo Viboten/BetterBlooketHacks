@@ -109,6 +109,8 @@ details summary ~ * {
         GUI.remove();
         clearInterval(loop);
         removeEventListener('keypress', toggleHidden)
+        removeEventListener('keypress', AutoAnswerToggle)
+        removeEventListener('keypress', HighlightAnswerToggle)
     }
 
     let minimize = document.createElement('button');
@@ -659,7 +661,21 @@ details summary ~ * {
             GUI.remove();
             clearInterval(loop);
             removeEventListener('keypress', toggleHidden)
+            removeEventListener('keypress', AutoAnswerToggle)
+            removeEventListener('keypress', HighlightAnswerToggle)
         }
     };
     addEventListener('keypress', PanicButton);
+
+      function AutoAnswerToggle(e) {
+        e.code == 'KeyF' && (autoAnswer = !autoAnswer)
+        }
+    
+    addEventListener('keypress', AutoAnswerToggle);
+
+      function HighlightAnswerToggle(e) {
+        e.code == 'KeyG' && (highlightAnswers = !highlightAnswers)
+        }
+    
+    addEventListener('keypress', HighlightAnswerToggle);
 })()
