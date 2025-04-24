@@ -6,15 +6,19 @@
     window.confirm = n.contentWindow.confirm.bind(window);
     n.remove();
 })();
+
 (() => {
     let style = document.createElement('style');
-    style.innerHTML = (`details > summary {
+    style.innerHTML = `
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+
+details > summary {
     cursor: pointer;
     transition: 0.15s;
     list-style: none;
 }
 details > summary:hover {
-    color: hsl(0, 0%, 50%)
+    color: hsl(0, 0%, 50%);
 }
 details > summary::-webkit-details-marker {
     display: none;
@@ -22,50 +26,56 @@ details > summary::-webkit-details-marker {
 details summary ~ * {
     animation: sweep .5s ease-in-out;
 }
-
 @keyframes sweep {
-    0%    {opacity: 0; transform: translateY(-10px)}
-    100%  {opacity: 1; transform: translateY(0)}
+    0% {opacity: 0; transform: translateY(-10px);}
+    100% {opacity: 1; transform: translateY(0);}
 }
 .cheat {
     border: none;
-    background: #232733;
-    padding: 5px;
-    margin: 3px;
-    width: 60%;
-    color: hsl(0, 0%, 100%);
-    transition: 0.2s;
-    border-radius: 5px;
+    background: #ffffff;
+    padding: 6px 12px;
+    margin: 6px auto;
+    width: 80%;
+    color: #333333;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    transition: background 0.2s, transform 0.1s;
+    border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 .cheat:hover {
-    background: #282e3b;
-}`);
+    background: #f0f0f0;
+    transform: translateY(-1px);
+}
+`;
 
     const GUI = document.createElement('div');
     GUI.appendChild(style);
-    GUI.style.width = '300px';
-    //GUI.style.height = '500px';
-    GUI.style.background = '#2b3140'
-    GUI.style.borderRadius = '5px';
+    GUI.style.width = '260px';
+    GUI.style.background = 'linear-gradient(135deg, #72e0ff, #38b6ff)';
+    GUI.style.borderRadius = '16px';
+    GUI.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.15)';
     GUI.style.position = 'absolute';
     GUI.style.textAlign = 'center';
-    GUI.style.fontFamily = 'Arial';
-    GUI.style.color = 'white';
+    GUI.style.fontFamily = "'Nunito', sans-serif";
+    GUI.style.color = '#ffffff';
     GUI.style.overflow = 'hidden';
-    GUI.style.top = '50px';
-    GUI.style.left = '50px';
+    GUI.style.top = '80px';
+    GUI.style.left = '80px';
+    GUI.style.zIndex = '9999';
 
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-    GUI.onmousedown = ((e = window.event) => {
+    GUI.onmousedown = (e = window.event) => {
         e.preventDefault();
         pos3 = e.clientX;
         pos4 = e.clientY;
-        document.onmouseup = (() => {
+        document.onmouseup = () => {
             document.onmouseup = null;
             document.onmousemove = null;
-        });
-        document.onmousemove = ((e) => {
+        };
+        document.onmousemove = (e) => {
             e = e || window.event;
             e.preventDefault();
             pos1 = pos3 - e.clientX;
@@ -74,77 +84,75 @@ details summary ~ * {
             pos4 = e.clientY;
             GUI.style.top = (GUI.offsetTop - pos2) + "px";
             GUI.style.left = (GUI.offsetLeft - pos1) + "px";
-        });
-    });
+        };
+    };
 
     let header = document.createElement('div');
     GUI.appendChild(header);
     header.style.width = '100%';
-    header.style.height = '35px';
-    header.style.paddingTop = '2px';
-    header.style.fontSize = '1.5rem';
-    header.style.textAlign = 'center'
-    header.innerHTML = `oaoaoaoa <span style="font-size: 0.75rem">mio e hund</span>`;
+    header.style.height = '40px';
+    header.style.background = 'rgba(255, 255, 255, 0.9)';
+    header.style.borderTopLeftRadius = '16px';
+    header.style.borderTopRightRadius = '16px';
+    header.style.fontSize = '1rem';
+    header.style.display = 'flex';
+    header.style.alignItems = 'center';
+    header.style.justifyContent = 'center';
+    header.style.position = 'relative';
+    header.style.color = '#38b6ff';
+    header.innerHTML = `aoaoao (mio e hund)`;
 
     let loop;
 
     let close = document.createElement('button');
     header.appendChild(close);
-    close.style.background = '#232733';
-    close.style.height = '45px';
-    close.style.width = '45px';
+    close.style.background = 'transparent';
+    close.style.height = '25px';
+    close.style.width = '25px';
     close.style.border = 'none';
     close.style.cursor = 'pointer';
     close.style.position = 'absolute';
-    close.style.top = '-10px';
-    close.style.right = '-10px';
-    close.style.fontSize = '1.5rem';
-    close.style.borderRadius = '10px';
-    close.style.fontFamily = 'Arial';
-    close.style.fontWeight = 'bolder';
-    close.style.paddingTop = '10px';
-    close.style.paddingRight = '15px';
-    close.style.color = '#3f4759'
-    close.innerText = 'X';
+    close.style.top = '7px';
+    close.style.right = '7px';
+    close.style.fontSize = '1rem';
+    close.style.borderRadius = '5px';
+    close.style.color = '#38b6ff';
+    close.innerText = '✕';
     close.onclick = () => {
         GUI.remove();
         clearInterval(loop);
-        removeEventListener('keypress', toggleHidden)
-        removeEventListener('keypress', AutoAnswerToggle)
-        removeEventListener('keypress', HighlightAnswerToggle)
-    }
+        removeEventListener('keypress', toggleHidden);
+        removeEventListener('keypress', AutoAnswerToggle);
+        removeEventListener('keypress', HighlightAnswerToggle);
+    };
 
     let minimize = document.createElement('button');
     header.appendChild(minimize);
-    minimize.style.background = '#232733';
-    minimize.style.height = '45px';
-    minimize.style.width = '45px';
+    minimize.style.background = 'transparent';
+    minimize.style.height = '25px';
+    minimize.style.width = '25px';
     minimize.style.border = 'none';
     minimize.style.cursor = 'pointer';
     minimize.style.position = 'absolute';
-    minimize.style.top = '-10px';
-    minimize.style.left = '-10px';
-    minimize.style.fontSize = '1.5rem';
-    minimize.style.borderRadius = '10px';
-    minimize.style.fontFamily = 'Arial';
-    minimize.style.fontWeight = 'bolder';
-    minimize.style.paddingTop = '10px';
-    minimize.style.paddingLeft = '15px';
-    minimize.style.color = '#3f4759'
-    minimize.innerText = '-';
+    minimize.style.top = '7px';
+    minimize.style.left = '7px';
+    minimize.style.fontSize = '1rem';
+    minimize.style.borderRadius = '5px';
+    minimize.style.color = '#38b6ff';
+    minimize.innerText = '–';
     minimize.onclick = () => {
         bodyDiv.hidden = !bodyDiv.hidden;
-    }
+    };
+
     let bodyDiv = document.createElement('div');
     let body = document.createElement('div');
     bodyDiv.appendChild(body);
     GUI.appendChild(bodyDiv);
 
-    body.innerHTML = (`<span id="curPageEl">${getSite(true) ? `Current gamemode: ${getSite(true)}` : 'No game detected'}</span><br><span>(Press E to hide)</span><br>`);
+    body.innerHTML = `<span id="curPageEl">${getSite(true) ? `Current gamemode: ${getSite(true)}` : 'No game detected'}</span><br><span>(Press E to hide)</span><br>`;
     body.style.display = 'block';
-    body.style.margin = '10px';
-    //body.style.background = 'white';
-    body.style.minHeight = '70px';
+    body.style.margin = '8px';
+    body.style.fontSize = '0.85rem';
 
     let activeCheats = document.createElement('span');
     body.appendChild(activeCheats);
@@ -153,9 +161,10 @@ details summary ~ * {
 
     let footer = document.createElement('div');
     bodyDiv.appendChild(footer);
-    footer.style.fontSize = '0.9rem';
-    footer.style.paddingBottom = '5px';
-    footer.innerHTML = (`<span><br>Cheats by <a style="color: lightblue" href="https://www.youtube.com/watch?v=3qi4OaOKyZI">vbucks</a></span>`);
+    footer.style.fontSize = '0.75rem';
+    footer.style.paddingBottom = '8px';
+    footer.style.color = '#ffffff';
+    footer.innerHTML = `<br>Cheats by <a style="color: #ffffff; text-decoration: underline;" href="https://www.youtube.com/watch?v=3qi4OaOKyZI">vbucks</a>`;
 
     var getValues = () => new Promise((e, t) => {
         try {
